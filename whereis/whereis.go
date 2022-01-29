@@ -3,53 +3,74 @@ package whereis
 import (
 	"fmt"
 	"net"
-	"os"
 	"strings"
 
 	"github.com/likexian/whois"
 )
 
 type NetworkAdomin struct {
-	IpRange  string
-	NetName  string
-	Country  string
-	Descript string
+	IpRange string
+	NetName string
+	Country string
+	Admin   string
 }
 
-func ResolveIP(domain string) {
+type Summary struct {
+	TargetDomain  string
+	TargetIp      string
+	WhoisResponse string
+	ParseResult   []NetworkAdomin
+}
+
+func Resolve(domain string) error {
+	var summary Summary
+	summary.TargetDomain = domain
 	addr, err := net.ResolveIPAddr("ip", domain)
 	if err != nil {
-		fmt.Println("Resolve error ", err.Error())
-		os.Exit(1)
+		return err
 	}
-	fmt.Printf("%+v\n", addr.String())
-	result, err := whois.Whois(addr.String(), "whois.iana.org")
+	summary.TargetIp = addr.String()
+	summary.WhoisResponse, err = whois.Whois(summary.TargetIp, "whois.iana.org")
 	if err != nil {
-		fmt.Println("whois error ", err.Error())
-		os.Exit(1)
+		return err
 	}
-	splittedStr := strings.Split(result, "\n\n")
-	for _, v := range splittedStr {
+	summary.ParseWhoisResponse()
+	summary.EchoResult()
+	return nil
+}
+
+func (s *Summary) ParseWhoisResponse() error {
+	paragraph := strings.Split(s.WhoisResponse, "\n\n")
+	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
-		t := strings.Split(v, "\n")
-		for _, s := range t {
-			y := strings.Split(s, ":")
-			switch y[0] {
+		row := strings.Split(v, "\n")
+		for _, val := range row {
+			col := strings.Split(val, ":")
+			switch col[0] {
 			case "inetnum", "NetRange":
-				tmp.IpRange = strings.TrimSpace(y[1])
+				tmp.IpRange = strings.TrimSpace(col[1])
 			case "netname", "NetName":
-				tmp.NetName = strings.TrimSpace(y[1])
+				tmp.NetName = strings.TrimSpace(col[1])
 			case "country":
-				tmp.Country = strings.TrimSpace(y[1])
+				tmp.Country = strings.TrimSpace(col[1])
 			case "descr", "Organization", "organisation":
-				if tmp.Descript == "" {
-					tmp.Descript = strings.TrimSpace(y[1])
+				if tmp.Admin == "" {
+					tmp.Admin = strings.TrimSpace(col[1])
 				}
 			}
 		}
 		if tmp.IpRange != "" {
-			fmt.Printf("%+v\n", tmp)
+			s.ParseResult = append(s.ParseResult, tmp)
 		}
 	}
+	return nil
+}
 
+func (s *Summary) EchoResult() {
+	fmt.Printf("Target domain:%s\n", s.TargetDomain)
+	fmt.Printf("Target ip    :%s\n\n", s.TargetIp)
+	fmt.Printf("Network Admin:%s\n", s.ParseResult[len(s.ParseResult)-1].Admin)
+	fmt.Printf("Network name :%s\n", s.ParseResult[len(s.ParseResult)-1].NetName)
+	fmt.Printf("ip range     :%s\n", s.ParseResult[len(s.ParseResult)-1].IpRange)
+	fmt.Printf("country      :%s\n", s.ParseResult[len(s.ParseResult)-1].Country)
 }
