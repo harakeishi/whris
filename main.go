@@ -6,6 +6,10 @@ package main
 
 import "github.com/harakeishi/whereis/cmd"
 
+var (
+	Version = "0.1.0"
+)
+
 func main() {
 	cmd.Execute()
 }
