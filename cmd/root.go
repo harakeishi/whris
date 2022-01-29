@@ -10,11 +10,16 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "whereis",
-	Short: "A brief description of your application",
-	Long:  `A longer description.`,
+	Short: "`whereis` is Displays management information for IPs associated with the domain.",
+	Long:  `"whereis" outputs the target domain and IP from the input domain, as well as the administrator information for that IP (administrator name, network name, range of IPs to be managed, and country name).`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		domain := args[0]
-		if err := Whereis.Resolve(domain); err != nil {
+		v, err := cmd.Flags().GetBool("verbose")
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		if err := Whereis.Resolve(domain, v); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
@@ -30,5 +35,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().StringP("domain", "d", "", "target domain")
+	rootCmd.Flags().BoolP("verbose", "v", false, "verbose output")
 }
