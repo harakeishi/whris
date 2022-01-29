@@ -5,7 +5,6 @@
 
 [![GitHub release](https://img.shields.io/github/release/harakeishi/whereis.svg)](https://github.com/harakeishi/whereis/releases)[![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whereis)](https://goreportcard.com/report/github.com/harakeishi/whereis)
 # Table of Contents
-- [Table of Contents](#table-of-contents)
 - [DEMO](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
