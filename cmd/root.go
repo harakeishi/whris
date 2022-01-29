@@ -3,7 +3,7 @@ package cmd
 import (
 	"os"
 
-	Whereis "github.com/harakeishi/whereis/wehreis"
+	Whereis "github.com/harakeishi/whereis/whereis"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +13,7 @@ var rootCmd = &cobra.Command{
 	Long:  `A longer description.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		domain := args[0]
-		Whereis.ResolveIP(domain)
+		Whereis.Resolve(domain)
 		return nil
 	},
 }
