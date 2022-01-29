@@ -22,7 +22,7 @@ type Summary struct {
 	ParseResult   []NetworkAdomin
 }
 
-func Resolve(domain string) error {
+func Resolve(domain string, verbose bool) error {
 	var summary Summary
 	summary.TargetDomain = domain
 	addr, err := net.ResolveIPAddr("ip", domain)
@@ -35,7 +35,7 @@ func Resolve(domain string) error {
 		return err
 	}
 	summary.ParseWhoisResponse()
-	summary.EchoResult()
+	summary.EchoResult(verbose)
 	return nil
 }
 
@@ -66,11 +66,21 @@ func (s *Summary) ParseWhoisResponse() error {
 	return nil
 }
 
-func (s *Summary) EchoResult() {
+func (s *Summary) EchoResult(verbose bool) {
 	fmt.Printf("Target domain:%s\n", s.TargetDomain)
 	fmt.Printf("Target ip    :%s\n\n", s.TargetIp)
 	fmt.Printf("Network Admin:%s\n", s.ParseResult[len(s.ParseResult)-1].Admin)
 	fmt.Printf("Network name :%s\n", s.ParseResult[len(s.ParseResult)-1].NetName)
 	fmt.Printf("ip range     :%s\n", s.ParseResult[len(s.ParseResult)-1].IpRange)
 	fmt.Printf("country      :%s\n", s.ParseResult[len(s.ParseResult)-1].Country)
+	if verbose {
+		fmt.Printf("\n=========Network Details=========\n")
+		for i, v := range s.ParseResult {
+			fmt.Printf("%d:\n", i)
+			fmt.Printf(" Network Admin:%s\n", v.Admin)
+			fmt.Printf(" Network name :%s\n", v.NetName)
+			fmt.Printf(" ip range     :%s\n", v.IpRange)
+			fmt.Printf(" country      :%s\n", v.Country)
+		}
+	}
 }
