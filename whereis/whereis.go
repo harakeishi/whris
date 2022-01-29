@@ -40,7 +40,19 @@ func Resolve(domain string, verbose bool) error {
 }
 
 func (s *Summary) ParseWhoisResponse() error {
-	paragraph := strings.Split(s.WhoisResponse, "\n\n")
+	var paragraph []string
+	whoisHost := "whois.apnic.net"
+	t := strings.Split(s.WhoisResponse, "\n")
+	col := strings.Split(t[10], ":")
+	whoisHost = strings.TrimSpace(col[1])
+	switch whoisHost {
+	case "whois.apnic.net":
+		paragraph = strings.Split(s.WhoisResponse, "\n\n")
+	case "whois.arin.net":
+		paragraph = strings.Split(s.WhoisResponse, "# start")
+	default:
+		paragraph = strings.Split(s.WhoisResponse, "\n\n")
+	}
 	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
 		row := strings.Split(v, "\n")
@@ -51,7 +63,7 @@ func (s *Summary) ParseWhoisResponse() error {
 				tmp.IpRange = strings.TrimSpace(col[1])
 			case "netname", "NetName":
 				tmp.NetName = strings.TrimSpace(col[1])
-			case "country":
+			case "country", "Country":
 				tmp.Country = strings.TrimSpace(col[1])
 			case "descr", "Organization", "organisation":
 				if tmp.Admin == "" {
