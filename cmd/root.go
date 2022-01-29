@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	Whereis "github.com/harakeishi/whereis/whereis"
@@ -13,7 +14,10 @@ var rootCmd = &cobra.Command{
 	Long:  `A longer description.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		domain := args[0]
-		Whereis.ResolveIP(domain)
+		if err := Whereis.Resolve(domain); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 		return nil
 	},
 }
