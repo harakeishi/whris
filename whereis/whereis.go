@@ -16,14 +16,16 @@ type NetworkAdomin struct {
 }
 
 type Summary struct {
-	TargetDomain  string
-	TargetIp      string
-	WhoisResponse string
-	ParseResult   []NetworkAdomin
+	TargetDomain        string
+	TargetIp            string
+	WhoisResponseServer string
+	WhoisResponse       string
+	ParseResult         []NetworkAdomin
 }
 
 func Resolve(domain string, verbose bool) error {
 	var summary Summary
+	summary.WhoisResponseServer = "whois.apnic.net"
 	summary.TargetDomain = domain
 	addr, err := net.ResolveIPAddr("ip", domain)
 	if err != nil {
@@ -34,24 +36,25 @@ func Resolve(domain string, verbose bool) error {
 	if err != nil {
 		return err
 	}
+	summary.SetWhoisResponseServerFromWhoisResponse()
 	summary.ParseWhoisResponse()
+	if !summary.ParseCheck() {
+		summary.ParseResult = nil
+		summary.WhoisResponse, err = whois.Whois(summary.TargetIp, summary.WhoisResponseServer)
+		if err != nil {
+			return err
+		}
+		summary.ParseWhoisResponse()
+	}
 	summary.EchoResult(verbose)
 	return nil
 }
 
 func (s *Summary) ParseWhoisResponse() error {
-	var paragraph []string
-	whoisHost := "whois.apnic.net"
-	t := strings.Split(s.WhoisResponse, "\n")
-	col := strings.Split(t[10], ":")
-	whoisHost = strings.TrimSpace(col[1])
-	switch whoisHost {
-	case "whois.apnic.net":
-		paragraph = strings.Split(s.WhoisResponse, "\n\n")
-	case "whois.arin.net":
-		paragraph = strings.Split(s.WhoisResponse, "# start")
-	default:
-		paragraph = strings.Split(s.WhoisResponse, "\n\n")
+	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
+	for _, v := range paragraph {
+		fmt.Println(v)
+		fmt.Println("============================================================")
 	}
 	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
@@ -65,7 +68,7 @@ func (s *Summary) ParseWhoisResponse() error {
 				tmp.NetName = strings.TrimSpace(col[1])
 			case "country", "Country":
 				tmp.Country = strings.TrimSpace(col[1])
-			case "descr", "Organization", "organisation":
+			case "descr", "Organization", "organisation", "owner":
 				if tmp.Admin == "" {
 					tmp.Admin = strings.TrimSpace(col[1])
 				}
@@ -95,4 +98,40 @@ func (s *Summary) EchoResult(verbose bool) {
 			fmt.Printf(" country      :%s\n", v.Country)
 		}
 	}
+}
+
+func (s *Summary) BreakDownWhoisResponseIntoParagraphs() []string {
+	fmt.Println(s.WhoisResponse)
+	fmt.Println(s.WhoisResponseServer)
+	switch s.WhoisResponseServer {
+	case "whois.arin.net":
+		return strings.Split(s.WhoisResponse, "#")
+	case "whois.apnic.net", "whois.ripe.net", "whois.lacnic.net":
+		return strings.Split(s.WhoisResponse, "%")
+	default:
+		return strings.Split(s.WhoisResponse, "\n\n")
+	}
+}
+
+func (s *Summary) SetWhoisResponseServerFromWhoisResponse() {
+	tmp := strings.Split(s.WhoisResponse, "\n")
+	for _, v := range tmp {
+		col := strings.Split(v, ":")
+		if col[0] == "refer" {
+			s.WhoisResponseServer = strings.TrimSpace(col[1])
+			break
+		}
+	}
+}
+
+func (s *Summary) ParseCheck() bool {
+	// 転送されていないかチェックする
+	list := []string{"apnic", "arin", "ripe", "lacnic"}
+	for _, v := range list {
+		if v == strings.ToLower(s.ParseResult[1].NetName) {
+			s.WhoisResponseServer = fmt.Sprintf("whois.%s.net", v)
+			return false
+		}
+	}
+	return true
 }
