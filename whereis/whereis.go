@@ -52,6 +52,7 @@ func Resolve(domain string, verbose bool) error {
 
 func (s *Summary) ParseWhoisResponse() error {
 	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
+	fmt.Println(paragraph)
 	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
 		row := strings.Split(v, "\n")
@@ -122,7 +123,7 @@ func (s *Summary) ParseCheck() bool {
 	// 転送されていないかチェックする
 	list := []string{"apnic", "arin", "ripe", "lacnic"}
 	for _, v := range list {
-		if v == strings.ToLower(s.ParseResult[1].NetName) {
+		if strings.Contains(strings.ToLower(s.ParseResult[1].NetName), v) {
 			s.WhoisResponseServer = fmt.Sprintf("whois.%s.net", v)
 			return false
 		}
