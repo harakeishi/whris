@@ -39,7 +39,7 @@ func Resolve(domain string, verbose bool) error {
 	summary.SetWhoisResponseServerFromWhoisResponse()
 	summary.ParseWhoisResponse()
 	if !summary.ParseCheck() {
-		summary.ParseResult = nil
+		summary.ParseResult = summary.ParseResult[1:]
 		summary.WhoisResponse, err = whois.Whois(summary.TargetIp, summary.WhoisResponseServer)
 		if err != nil {
 			return err
@@ -52,7 +52,6 @@ func Resolve(domain string, verbose bool) error {
 
 func (s *Summary) ParseWhoisResponse() error {
 	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
-	fmt.Println(paragraph)
 	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
 		row := strings.Split(v, "\n")
