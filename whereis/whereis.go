@@ -53,10 +53,6 @@ func Resolve(domain string, verbose bool) error {
 func (s *Summary) ParseWhoisResponse() error {
 	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
 	for _, v := range paragraph {
-		fmt.Println(v)
-		fmt.Println("============================================================")
-	}
-	for _, v := range paragraph {
 		tmp := NetworkAdomin{}
 		row := strings.Split(v, "\n")
 		for _, val := range row {
@@ -101,8 +97,6 @@ func (s *Summary) EchoResult(verbose bool) {
 }
 
 func (s *Summary) BreakDownWhoisResponseIntoParagraphs() []string {
-	fmt.Println(s.WhoisResponse)
-	fmt.Println(s.WhoisResponseServer)
 	switch s.WhoisResponseServer {
 	case "whois.arin.net":
 		return strings.Split(s.WhoisResponse, "#")
