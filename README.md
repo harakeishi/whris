@@ -36,7 +36,7 @@ country      :JP
 # Installation
  
 ```bash
-$ go install github.com/harakeishi/whereis
+$ go install github.com/harakeishi/whereis@latest
 ```
  
 # Usage
