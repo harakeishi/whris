@@ -3,7 +3,7 @@
 
 "whris" is Displays management information for IPs associated with the domain.
 
-[![GitHub release](https://img.shields.io/github/release/harakeishi/whris.svg)](https://github.com/harakeishi/whris/releases)[![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whris)](https://goreportcard.com/report/github.com/harakeishi/whris)
+[![GitHub release](https://img.shields.io/github/release/harakeishi/whris.svg)](https://github.com/harakeishi/whris/releases)[![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whris)](https://goreportcard.com/report/github.com/harakeishi/whris)[![Test](https://github.com/harakeishi/whris/actions/workflows/test.yml/badge.svg)](https://github.com/harakeishi/whris/actions/workflows/test.yml)
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [DEMO](#demo)
