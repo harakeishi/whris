@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"os"
 
-	Whereis "github.com/harakeishi/whereis/whereis"
+	whris "github.com/harakeishi/whris/whris"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "whereis",
-	Short: "`whereis` is Displays management information for IPs associated with the domain.",
-	Long:  `"whereis" outputs the target domain and IP from the input domain, as well as the administrator information for that IP (administrator name, network name, range of IPs to be managed, and country name).`,
+	Use:   "whris",
+	Short: "`whris` is Displays management information for IPs associated with the domain.",
+	Long:  `"whris" outputs the target domain and IP from the input domain, as well as the administrator information for that IP (administrator name, network name, range of IPs to be managed, and country name).`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		domain := args[0]
 		v, err := cmd.Flags().GetBool("verbose")
@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		if err := Whereis.Resolve(domain, v); err != nil {
+		if err := whris.Resolve(domain, v); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
