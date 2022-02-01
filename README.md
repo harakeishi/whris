@@ -1,10 +1,11 @@
 ![logo](logo.png)
 
 
-"whereis" is Displays management information for IPs associated with the domain.
+"whris" is Displays management information for IPs associated with the domain.
 
-[![GitHub release](https://img.shields.io/github/release/harakeishi/whereis.svg)](https://github.com/harakeishi/whereis/releases)[![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whereis)](https://goreportcard.com/report/github.com/harakeishi/whereis)
+[![GitHub release](https://img.shields.io/github/release/harakeishi/whris.svg)](https://github.com/harakeishi/whris/releases)[![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whris)](https://goreportcard.com/report/github.com/harakeishi/whris)
 # Table of Contents
+- [Table of Contents](#table-of-contents)
 - [DEMO](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -13,7 +14,7 @@
 # DEMO
  
 ```bash
-$ whereis exmple.com      
+$ whris exmple.com      
 Target domain:exmple.com
 Target ip    :67.210.233.131
 
@@ -24,7 +25,7 @@ country      :
 ```
  
  ```bash
-$ whereis yaserarenai.com 
+$ whris yaserarenai.com 
 Target domain:yaserarenai.com
 Target ip    :163.44.185.212
 
@@ -36,17 +37,17 @@ country      :JP
 # Installation
  
 ```bash
-$ go install github.com/harakeishi/whereis
+$ go install github.com/harakeishi/whris
 ```
  
 # Usage
  
-If you want to know the administrator of the IP associated with the domain, type `whereis [target]`.
+If you want to know the administrator of the IP associated with the domain, type `whris [target]`.
  
  You will then see the target domain and IP, and the administrator information for that IP (administrator name, network name, range of IPs to be managed, and country).
  
 ```bash
-$ whereis yaserarenai.com 
+$ whris yaserarenai.com 
 Target domain:yaserarenai.com
 Target ip    :163.44.185.212
 
@@ -61,7 +62,7 @@ If you want to see more details, use the `-v` option.
 Then you will be able to see the higher level network administrator information.
 
 ```bash
-$ whereis yaserarenai.com -v
+$ whris yaserarenai.com -v
 Target domain:yaserarenai.com
 Target ip    :163.44.185.212
 
