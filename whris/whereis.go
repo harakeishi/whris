@@ -1,4 +1,4 @@
-package whereis
+package whris
 
 import (
 	"fmt"
