@@ -6,10 +6,6 @@ package main
 
 import "github.com/harakeishi/whris/cmd"
 
-var (
-	Version = "0.1.10"
-)
-
 func main() {
 	cmd.Execute()
 }

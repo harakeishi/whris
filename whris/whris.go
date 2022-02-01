@@ -50,7 +50,7 @@ func Resolve(domain string, verbose bool) (Summary, error) {
 	return summary, nil
 }
 
-func (s *Summary) ParseWhoisResponse() error {
+func (s *Summary) ParseWhoisResponse() {
 	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
 	for _, v := range paragraph {
 		tmp := NetworkAdmin{}
@@ -74,7 +74,6 @@ func (s *Summary) ParseWhoisResponse() error {
 			s.ParseResult = append(s.ParseResult, tmp)
 		}
 	}
-	return nil
 }
 
 func (s *Summary) EchoResult(verbose bool) {
