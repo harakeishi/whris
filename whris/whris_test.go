@@ -77,7 +77,7 @@ func TestResolve(t *testing.T) {
 		want fields
 	}{
 		{
-			name: "The_result_of_example.com_must_be_returned",
+			name: "the_result_of_example.com_must_be_returned",
 			args: args{
 				domain:  "example.com",
 				verbose: false,
@@ -123,7 +123,7 @@ func TestSummary_ParseWhoisResponse(t *testing.T) {
 		want   fields
 	}{
 		{
-			name: "Be able to correctly parse the response from ripe",
+			name: "be_able_to_correctly_parse_the_response_from_ripe",
 			fields: fields{
 				WhoisResponseServer: "whois.ripe.net",
 				WhoisResponse:       TestRipeWhoisResponse,
@@ -172,7 +172,7 @@ func TestSummary_SetWhoisResponseServerFromWhoisResponse(t *testing.T) {
 		want   fields
 	}{
 		{
-			name: "Be able to correctly split the response from ripe",
+			name: "the_response_server_can_be_set_correctly_from_the_response_of_ripe",
 			fields: fields{
 				WhoisResponseServer: "whois.apnic.net",
 				WhoisResponse:       TestRipeWhoisResponse,
@@ -215,7 +215,7 @@ func TestSummary_ParseCheck(t *testing.T) {
 		want   wants
 	}{
 		{
-			name: "Return true in a non-redirected response",
+			name: "return_true_in_non-redirected_response",
 			fields: fields{
 				WhoisResponseServer: "whois.ripe.net",
 				ParseResult: []NetworkAdmin{
@@ -237,7 +237,7 @@ func TestSummary_ParseCheck(t *testing.T) {
 			},
 		},
 		{
-			name: "Return false in redirected response.",
+			name: "return_false_in_redirected_response",
 			fields: fields{
 				WhoisResponseServer: "whois.apnic.net",
 				ParseResult: []NetworkAdmin{
