@@ -31,6 +31,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "koyashiro",
+      "name": "koyashiro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6698252?v=4",
+      "profile": "https://koyashi.ro",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
