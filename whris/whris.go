@@ -8,7 +8,7 @@ import (
 	"github.com/likexian/whois"
 )
 
-type NetworkAdomin struct {
+type NetworkAdmin struct {
 	IpRange string
 	NetName string
 	Country string
@@ -20,7 +20,7 @@ type Summary struct {
 	TargetIp            string
 	WhoisResponseServer string
 	WhoisResponse       string
-	ParseResult         []NetworkAdomin
+	ParseResult         []NetworkAdmin
 }
 
 func Resolve(domain string, verbose bool) error {
