@@ -1,6 +1,6 @@
 ![logo](logo.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 
@@ -110,6 +110,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.dim13.org"><img src="https://avatars.githubusercontent.com/u/4006042?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitri Sokolyuk</b></sub></a><br /><a href="#ideas-dim13" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://mattn.kaoriya.net/"><img src="https://avatars.githubusercontent.com/u/10111?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mattn</b></sub></a><br /><a href="#ideas-mattn" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://codehex.dev"><img src="https://avatars.githubusercontent.com/u/6500104?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kei Kamikawa</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=Code-Hex" title="Code">💻</a></td>
+    <td align="center"><a href="https://koyashi.ro"><img src="https://avatars.githubusercontent.com/u/6698252?v=4?s=100" width="100px;" alt=""/><br /><sub><b>koyashiro</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=koyashiro" title="Documentation">📖</a></td>
   </tr>
 </table>
 
