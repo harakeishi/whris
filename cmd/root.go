@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		if err := whris.Resolve(domain, v); err != nil {
+		if _, err := whris.Resolve(domain, v); err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}

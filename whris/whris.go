@@ -23,18 +23,18 @@ type Summary struct {
 	ParseResult         []NetworkAdmin
 }
 
-func Resolve(domain string, verbose bool) error {
+func Resolve(domain string, verbose bool) (Summary, error) {
 	var summary Summary
 	summary.WhoisResponseServer = "whois.apnic.net"
 	summary.TargetDomain = domain
 	addr, err := net.ResolveIPAddr("ip", domain)
 	if err != nil {
-		return err
+		return Summary{}, err
 	}
 	summary.TargetIp = addr.String()
 	summary.WhoisResponse, err = whois.Whois(summary.TargetIp, "whois.iana.org")
 	if err != nil {
-		return err
+		return Summary{}, err
 	}
 	summary.SetWhoisResponseServerFromWhoisResponse()
 	summary.ParseWhoisResponse()
@@ -42,12 +42,12 @@ func Resolve(domain string, verbose bool) error {
 		summary.ParseResult = summary.ParseResult[1:]
 		summary.WhoisResponse, err = whois.Whois(summary.TargetIp, summary.WhoisResponseServer)
 		if err != nil {
-			return err
+			return Summary{}, err
 		}
 		summary.ParseWhoisResponse()
 	}
 	summary.EchoResult(verbose)
-	return nil
+	return summary, nil
 }
 
 func (s *Summary) ParseWhoisResponse() error {
