@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  push:
+      branches:
+        - main
+  pull_request:
+jobs:
+  golang-test:
+    strategy:
+      matrix:
+        go-version: [1.17.x]
+        os: [ubuntu-latest]
+    name: lint
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: latest
+      - name: testing
+        run: go test ./...
