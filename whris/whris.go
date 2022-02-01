@@ -53,7 +53,7 @@ func Resolve(domain string, verbose bool) error {
 func (s *Summary) ParseWhoisResponse() error {
 	paragraph := s.BreakDownWhoisResponseIntoParagraphs()
 	for _, v := range paragraph {
-		tmp := NetworkAdomin{}
+		tmp := NetworkAdmin{}
 		row := strings.Split(v, "\n")
 		for _, val := range row {
 			col := strings.Split(val, ":")
