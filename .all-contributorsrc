@@ -22,6 +22,15 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "Code-Hex",
+      "name": "Kei Kamikawa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6500104?v=4",
+      "profile": "https://codehex.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
