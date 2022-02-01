@@ -37,7 +37,7 @@ country      :JP
 # Installation
  
 ```bash
-$ go install github.com/harakeishi/whris
+$ go install github.com/harakeishi/whris@latest
 ```
  
 # Usage
