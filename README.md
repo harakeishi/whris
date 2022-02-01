@@ -14,14 +14,14 @@
 # DEMO
  
 ```bash
-$ whris exmple.com      
-Target domain:exmple.com
-Target ip    :67.210.233.131
+$ whris example.com      
+Target domain:example.com
+Target ip    :93.184.216.34
 
-Network Admin:Globalcon.net, LLC (GLOBA-72)
-Network name :GLOBALCON-WEBHOST-NET1
-ip range     :67.210.233.128 - 67.210.233.255
-country      :
+Network Admin:NETBLK-03-EU-93-184-216-0-24
+Network name :EDGECAST-NETBLK-03
+ip range     :93.184.216.0 - 93.184.216.255
+country      :EU
 ```
  
  ```bash
