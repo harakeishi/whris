@@ -1,6 +1,7 @@
 package whris
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -81,30 +82,49 @@ func TestResolve(t *testing.T) {
 
 func TestSummary_ParseWhoisResponse(t *testing.T) {
 	type fields struct {
-		TargetDomain        string
-		TargetIp            string
 		WhoisResponseServer string
 		WhoisResponse       string
 		ParseResult         []NetworkAdmin
 	}
 	tests := []struct {
-		name    string
-		fields  fields
-		wantErr bool
+		name   string
+		fields fields
+		want   fields
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Be able to correctly parse the response from ripe",
+			fields: fields{
+				WhoisResponseServer: "whois.ripe.net",
+				WhoisResponse:       TestRipeWhoisResponse,
+			},
+			want: fields{
+				WhoisResponseServer: "whois.ripe.net",
+				WhoisResponse:       TestRipeWhoisResponse,
+				ParseResult: []NetworkAdmin{
+					{
+						IpRange: "93.0.0.0 - 93.255.255.255",
+						Admin:   "RIPE NCC",
+					},
+					{
+						IpRange: "93.184.216.0 - 93.184.216.255",
+						Admin:   "NETBLK-03-EU-93-184-216-0-24",
+						Country: "EU",
+						NetName: "EDGECAST-NETBLK-03",
+					},
+				},
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s := &Summary{
-				TargetDomain:        tt.fields.TargetDomain,
-				TargetIp:            tt.fields.TargetIp,
 				WhoisResponseServer: tt.fields.WhoisResponseServer,
 				WhoisResponse:       tt.fields.WhoisResponse,
 				ParseResult:         tt.fields.ParseResult,
 			}
-			if err := s.ParseWhoisResponse(); (err != nil) != tt.wantErr {
-				t.Errorf("Summary.ParseWhoisResponse() error = %v, wantErr %v", err, tt.wantErr)
+			s.ParseWhoisResponse()
+			if !reflect.DeepEqual(s.ParseResult, tt.want.ParseResult) {
+				t.Fatalf("Summary.ParseWhoisResponse() = %v, want %v", s.ParseResult, tt.want.ParseResult)
 			}
 		})
 	}
