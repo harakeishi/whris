@@ -174,12 +174,61 @@ func TestSummary_ParseCheck(t *testing.T) {
 		WhoisResponse       string
 		ParseResult         []NetworkAdmin
 	}
+	type wants struct {
+		WhoisResponseServer string
+		Result              bool
+	}
 	tests := []struct {
 		name   string
 		fields fields
-		want   bool
+		want   wants
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Return true in a non-redirected response",
+			fields: fields{
+				WhoisResponseServer: "whois.ripe.net",
+				ParseResult: []NetworkAdmin{
+					{
+						IpRange: "93.0.0.0 - 93.255.255.255",
+						Admin:   "RIPE NCC",
+					},
+					{
+						IpRange: "93.184.216.0 - 93.184.216.255",
+						Admin:   "NETBLK-03-EU-93-184-216-0-24",
+						Country: "EU",
+						NetName: "EDGECAST-NETBLK-03",
+					},
+				},
+			},
+			want: wants{
+				WhoisResponseServer: "whois.ripe.net",
+				Result:              true,
+			},
+		},
+		{
+			name: "Return false in redirected response.",
+			fields: fields{
+				WhoisResponseServer: "whois.apnic.net",
+				ParseResult: []NetworkAdmin{
+					{
+						IpRange: "157.1.0.0 - 157.14.255.255",
+						Admin:   "APNIC",
+						Country: "",
+						NetName: "",
+					},
+					{
+						IpRange: "93.0.0.0 - 93.255.255.255",
+						Admin:   "DS7892-RIPE",
+						Country: "",
+						NetName: "RIPE NCC",
+					},
+				},
+			},
+			want: wants{
+				WhoisResponseServer: "whois.ripe.net",
+				Result:              false,
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -190,8 +239,12 @@ func TestSummary_ParseCheck(t *testing.T) {
 				WhoisResponse:       tt.fields.WhoisResponse,
 				ParseResult:         tt.fields.ParseResult,
 			}
-			if got := s.ParseCheck(); got != tt.want {
-				t.Errorf("Summary.ParseCheck() = %v, want %v", got, tt.want)
+			got := s.ParseCheck()
+			if got != tt.want.Result {
+				t.Errorf("Summary.ParseCheck() Return = %v, want %v", got, tt.want.Result)
+			}
+			if s.WhoisResponseServer != tt.want.WhoisResponseServer {
+				t.Errorf("Summary.ParseCheck() WhoisResponseServer = %v, want %v", s.WhoisResponseServer, tt.want.WhoisResponseServer)
 			}
 		})
 	}
