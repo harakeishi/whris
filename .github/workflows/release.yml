@@ -25,6 +25,8 @@ jobs:
           sudo apt update
           sudo apt install svu
           echo "$(svu p)" > ./cmd/version.txt
+          git tag "$(svu p)"
+          git push --tags
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
