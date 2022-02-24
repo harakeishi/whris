@@ -33,4 +33,4 @@ jobs:
         name: Show GoReleaser version
         run: |
           goreleaser -v
-          echo ${{ steps.action1.outputs.Version }}
+          echo ${{ steps.action3.outputs.Version }}
