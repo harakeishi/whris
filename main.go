@@ -5,8 +5,6 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package main
 
 import (
-	"fmt"
-
 	"github.com/harakeishi/whris/cmd"
 )
 
@@ -15,6 +13,5 @@ var (
 )
 
 func main() {
-	fmt.Print(version)
-	cmd.Execute()
+	cmd.Execute(version)
 }
