@@ -11,8 +11,6 @@ builds:
       - linux
       - windows
       - darwin
-    ldflags:
-      - -s -w -X "main.version={{.Env.VERSION}}"
 archives:
   - replacements:
       darwin: Darwin

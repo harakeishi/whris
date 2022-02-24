@@ -8,7 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Version = "dev"
+var (
+	Version = "nil"
+)
 var rootCmd = &cobra.Command{
 	Use:   "whris",
 	Short: "`whris` is Displays management information for IPs associated with the domain.",
@@ -20,7 +22,7 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			fmt.Println(Version)
+			fmt.Printf("v%s\n", Version)
 			return nil
 		}
 		domain := args[0]
