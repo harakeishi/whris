@@ -37,3 +37,4 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          Version: ${{ steps.create-tag.outputs.Version }}
