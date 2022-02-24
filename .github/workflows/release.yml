@@ -28,15 +28,14 @@ jobs:
           git tag "$(svu p)"
           git push --tags
       -
-        name: Run GoReleaser
+        name: install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
           install-only: true
       -
-        name:
+        name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           VERSION: ${{ steps.create-tag.outputs.VERSION }}
         run: |
-          echo $VERSION
-          goreleaser check
+          VERSION=$(echo $VERSION) goreleaser
