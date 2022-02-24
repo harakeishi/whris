@@ -3,6 +3,7 @@ name: goreleaser
 on:
   push:
 
+
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
@@ -25,14 +26,14 @@ jobs:
           sudo apt update
           sudo apt install svu
           echo "::set-output name=Version::$(svu p)"
+          git tag "$(svu p)"
+          git push --tags
       -
-        name: Install GoReleaser
+        name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          install-only: true
-      -
-        name: Show GoReleaser version
-        run: |
-          goreleaser check
-          echo ${{ steps.create-tag.outputs.Version }}
-          
+          distribution: goreleaser
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
