@@ -37,3 +37,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           VERSION: ${{ steps.create-tag.outputs.VERSION }}
+        run: |
+          echo ${{ steps.create-tag.outputs.VERSION }}
