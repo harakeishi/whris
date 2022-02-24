@@ -2,8 +2,8 @@ name: goreleaser
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
   goreleaser:
@@ -19,6 +19,15 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.15
+      -
+        name: Create tag
+        run: |
+          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | tee /etc/apt/sources.list.d/caarlos0.list
+          apt update
+          apt install svu
+          git tag "$(svu p)"
+          git push --tags
+          echo "::set-output name=Version::$(svu p)"
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
