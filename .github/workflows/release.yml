@@ -19,6 +19,7 @@ jobs:
           go-version: 1.15
       -
         name: Create tag
+        id: create-tag
         run: |
           echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
           sudo apt update
@@ -33,4 +34,4 @@ jobs:
         name: Show GoReleaser version
         run: |
           goreleaser -v
-          echo ${{ steps.action3.outputs.Version }}
+          echo ${{ steps.create-tag.outputs.Version }}
