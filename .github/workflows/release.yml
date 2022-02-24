@@ -22,9 +22,9 @@ jobs:
       -
         name: Create tag
         run: |
-          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | tee /etc/apt/sources.list.d/caarlos0.list
-          apt update
-          apt install svu
+          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
+          sudo apt update
+          sudo apt install svu
           git tag "$(svu p)"
           git push --tags
           echo "::set-output name=Version::$(svu p)"
