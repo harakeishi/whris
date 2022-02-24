@@ -21,13 +21,14 @@ jobs:
           go-version: 1.15
       -
         name: Create tag
+        id: create-tag
         run: |
-          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | tee /etc/apt/sources.list.d/caarlos0.list
-          apt update
-          apt install svu
+          echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
+          sudo apt update
+          sudo apt install svu
+          echo "::set-output name=Version::$(svu p)"
           git tag "$(svu p)"
           git push --tags
-          echo "::set-output name=Version::$(svu p)"
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
@@ -37,3 +38,4 @@ jobs:
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          Version: ${{ steps.create-tag.outputs.Version }}
