@@ -33,5 +33,6 @@ jobs:
       -
         name: Show GoReleaser version
         run: |
-          goreleaser -v
+          goreleaser check
           echo ${{ steps.create-tag.outputs.Version }}
+          
