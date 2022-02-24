@@ -25,5 +25,12 @@ jobs:
           sudo apt update
           sudo apt install svu
           echo "$(svu p)" > ./cmd/version.txt
-          cat ./cmd/version.txt
-
+      -
+        name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}

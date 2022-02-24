@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 
@@ -8,9 +9,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	Version = "nil"
-)
+//go:embed version.txt
+var Version string
+
 var rootCmd = &cobra.Command{
 	Use:   "whris",
 	Short: "`whris` is Displays management information for IPs associated with the domain.",
@@ -22,7 +23,7 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			fmt.Printf("v%s\n", Version)
+			fmt.Println(Version)
 			return nil
 		}
 		domain := args[0]
@@ -39,8 +40,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute(ver string) {
-	Version = ver
+func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
