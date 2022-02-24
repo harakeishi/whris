@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	whris "github.com/harakeishi/whris/whris"
 	"github.com/spf13/cobra"
@@ -20,7 +21,17 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			fmt.Println(Version)
+			if Version != "dev" {
+				fmt.Println(Version)
+
+				return nil
+			}
+			if buildInfo, ok := debug.ReadBuildInfo(); ok {
+				fmt.Println(buildInfo.Main.Version)
+
+				return nil
+			}
+			fmt.Println("unknown")
 			return nil
 		}
 		domain := args[0]
