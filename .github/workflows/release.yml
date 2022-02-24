@@ -23,15 +23,14 @@ jobs:
           echo 'deb [trusted=yes] https://apt.fury.io/caarlos0/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
           sudo apt update
           sudo apt install svu
-          git tag "$(svu p)"
-          git push --tags
           echo "::set-output name=Version::$(svu p)"
       -
-        name: Run GoReleaser
+        name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          distribution: goreleaser
-          version: latest
-          args: release --rm-dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          install-only: true
+      -
+        name: Show GoReleaser version
+        run: |
+          goreleaser -v
+          echo ${{ steps.action1.outputs.Version }}
