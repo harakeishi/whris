@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"runtime/debug"
+	"strings"
 
 	whris "github.com/harakeishi/whris/whris"
 	"github.com/spf13/cobra"
 )
 
-var Version = "dev"
+var Ver = "dev"
 var rootCmd = &cobra.Command{
 	Use:   "whris",
 	Short: "`whris` is Displays management information for IPs associated with the domain.",
@@ -21,14 +22,12 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			if Version != "dev" {
-				fmt.Println(Version)
-
+			if strings.Contains(Ver, "dev") {
+				fmt.Println(Ver)
 				return nil
 			}
 			if buildInfo, ok := debug.ReadBuildInfo(); ok {
 				fmt.Println(buildInfo.Main.Version)
-
 				return nil
 			}
 			fmt.Println("unknown")
@@ -49,7 +48,7 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute(ver string) {
-	Version = ver
+	Ver = ver
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
