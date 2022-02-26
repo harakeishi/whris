@@ -12,7 +12,7 @@ builds:
       - windows
       - darwin
     ldflags:
-      - -s -w -X github.com/harakeishi/whris/cmd.ver={{.Version}}
+      - -s -w -X github.com/harakeishi/curver.Version={{.Version}}
 archives:
   - replacements:
       darwin: Darwin
