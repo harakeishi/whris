@@ -27,7 +27,7 @@ var rootCmd = &cobra.Command{
 				return nil
 			}
 			if buildInfo, ok := debug.ReadBuildInfo(); ok {
-				fmt.Printf("%+v\n", buildInfo.Main)
+				fmt.Println(buildInfo.Main.Version)
 				return nil
 			}
 			fmt.Println("unknown")
