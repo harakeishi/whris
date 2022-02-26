@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var Ver = "dev"
+var ver = "dev"
 var rootCmd = &cobra.Command{
 	Use:   "whris",
 	Short: "`whris` is Displays management information for IPs associated with the domain.",
@@ -22,12 +22,12 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			if strings.Contains(Ver, "dev") {
-				fmt.Println(Ver)
+			if !strings.Contains(ver, "dev") {
+				fmt.Println(ver)
 				return nil
 			}
 			if buildInfo, ok := debug.ReadBuildInfo(); ok {
-				fmt.Println(buildInfo.Main.Version)
+				fmt.Printf("%+v\n", buildInfo.Main)
 				return nil
 			}
 			fmt.Println("unknown")
@@ -47,8 +47,7 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute(ver string) {
-	Ver = ver
+func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
