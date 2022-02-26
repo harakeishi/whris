@@ -9,7 +9,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var ver = "dev"
 var rootCmd = &cobra.Command{
 	Use:   "whris",
 	Short: "`whris` is Displays management information for IPs associated with the domain.",
