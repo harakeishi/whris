@@ -8,10 +8,6 @@ import (
 	"github.com/harakeishi/whris/cmd"
 )
 
-var (
-	version = "dev"
-)
-
 func main() {
-	cmd.Execute(version)
+	cmd.Execute()
 }
