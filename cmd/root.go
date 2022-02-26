@@ -3,9 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"runtime/debug"
-	"strings"
 
+	curver "github.com/harakeishi/curver"
 	whris "github.com/harakeishi/whris/whris"
 	"github.com/spf13/cobra"
 )
@@ -22,15 +21,7 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		if version {
-			if !strings.Contains(ver, "dev") {
-				fmt.Println(ver)
-				return nil
-			}
-			if buildInfo, ok := debug.ReadBuildInfo(); ok {
-				fmt.Println(buildInfo.Main.Version)
-				return nil
-			}
-			fmt.Println("unknown")
+			curver.EchoVersion()
 			return nil
 		}
 		domain := args[0]
