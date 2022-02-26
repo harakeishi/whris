@@ -3,7 +3,7 @@ module github.com/harakeishi/whris
 go 1.13
 
 require (
-	github.com/harakeishi/curver v0.1.0
+	github.com/harakeishi/curver v0.1.1
 	github.com/likexian/whois v1.12.4
 	github.com/spf13/cobra v1.3.0
 )
