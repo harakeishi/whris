@@ -11,6 +11,9 @@ builds:
       - linux
       - windows
       - darwin
+    ignore:
+      - goos: windows
+        goarch: arm64
     ldflags:
       - -s -w -X github.com/harakeishi/curver.Version={{.Version}}
 archives:
