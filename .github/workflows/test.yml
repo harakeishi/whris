@@ -20,4 +20,6 @@ jobs:
         with:
           version: latest
       - name: testing
-        run: go test ./...
+        run: go test ./... -coverprofile=coverage.out
+      - name: create report
+        uses: k1LoW/octocov-action@v0
