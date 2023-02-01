@@ -1,6 +1,6 @@
 ![logo](logo.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![GitHub release](https://img.shields.io/github/release/harakeishi/whris.svg)](https://github.com/harakeishi/whris/releases) [![Go Report Card](https://goreportcard.com/badge/github.com/harakeishi/whris)](https://goreportcard.com/report/github.com/harakeishi/whris) [![Test](https://github.com/harakeishi/whris/actions/workflows/test.yml/badge.svg)](https://github.com/harakeishi/whris/actions/workflows/test.yml)
 
@@ -106,13 +106,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://www.dim13.org"><img src="https://avatars.githubusercontent.com/u/4006042?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dimitri Sokolyuk</b></sub></a><br /><a href="#ideas-dim13" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://mattn.kaoriya.net/"><img src="https://avatars.githubusercontent.com/u/10111?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mattn</b></sub></a><br /><a href="#ideas-mattn" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://codehex.dev"><img src="https://avatars.githubusercontent.com/u/6500104?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kei Kamikawa</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=Code-Hex" title="Code">💻</a></td>
-    <td align="center"><a href="https://koyashi.ro"><img src="https://avatars.githubusercontent.com/u/6698252?v=4?s=100" width="100px;" alt=""/><br /><sub><b>koyashiro</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=koyashiro" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://noborus.github.io/"><img src="https://avatars.githubusercontent.com/u/2296563?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Noboru Saito</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=noborus" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.dim13.org"><img src="https://avatars.githubusercontent.com/u/4006042?v=4?s=100" width="100px;" alt="Dimitri Sokolyuk"/><br /><sub><b>Dimitri Sokolyuk</b></sub></a><br /><a href="#ideas-dim13" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://mattn.kaoriya.net/"><img src="https://avatars.githubusercontent.com/u/10111?v=4?s=100" width="100px;" alt="mattn"/><br /><sub><b>mattn</b></sub></a><br /><a href="#ideas-mattn" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://codehex.dev"><img src="https://avatars.githubusercontent.com/u/6500104?v=4?s=100" width="100px;" alt="Kei Kamikawa"/><br /><sub><b>Kei Kamikawa</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=Code-Hex" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://koyashi.ro"><img src="https://avatars.githubusercontent.com/u/6698252?v=4?s=100" width="100px;" alt="koyashiro"/><br /><sub><b>koyashiro</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=koyashiro" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://noborus.github.io/"><img src="https://avatars.githubusercontent.com/u/2296563?v=4?s=100" width="100px;" alt="Noboru Saito"/><br /><sub><b>Noboru Saito</b></sub></a><br /><a href="https://github.com/harakeishi/whris/commits?author=noborus" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ben131-Go"><img src="https://avatars.githubusercontent.com/u/123849733?v=4?s=100" width="100px;" alt="Ben131-Go"/><br /><sub><b>Ben131-Go</b></sub></a><br /><a href="https://github.com/harakeishi/whris/issues?q=author%3ABen131-Go" title="Bug reports">🐛</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

@@ -49,6 +49,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Ben131-Go",
+      "name": "Ben131-Go",
+      "avatar_url": "https://avatars.githubusercontent.com/u/123849733?v=4",
+      "profile": "https://github.com/Ben131-Go",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -56,5 +65,6 @@
   "projectOwner": "harakeishi",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
